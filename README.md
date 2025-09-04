@@ -10,6 +10,14 @@ Foram utilizadas as seguintes tecnologias:
 - HTML / CSS
 - SQLite
 
+Funcionalidades do app:
+- Adicionar tarefas
+- Marcar tarefas como concluídas
+- Editar tarefas
+- Deletar tarefas
+- Login/logout de usuários
+- API REST para listar tarefas do usuário logado
+
 ## 🚀 Como rodar localmente
 
 ```bash
