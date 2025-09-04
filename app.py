@@ -43,14 +43,14 @@ def signup():
         password = request.form['password'].strip()
 
         if not username or not password:
-            flash("Preencha todos os campos!", "error")
+            flash("Preencha todos os campos.", "error")
             return redirect(url_for('signup'))
 
         existing_user = User.query.filter_by(username=username).first()
         if existing_user:
-            flash("Usuário já existe!", "error")
+            flash("Usuário já existe. Escolha outro nome.", "error")
             return redirect(url_for('signup'))
-
+        
         hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
         new_user = User(username=username, password=hashed_password)
         db.session.add(new_user)
