@@ -1,4 +1,4 @@
-/* Reset básico */
+/* Reset básico */ 
 * {
     margin: 0;
     padding: 0;
@@ -48,7 +48,7 @@ input[type="password"]:focus {
     outline: none;
 }
 
-/* Botões */
+/* Botões gerais */
 button {
     width: 100%;
     padding: 10px 12px;
@@ -63,6 +63,24 @@ button {
 
 button:hover {
     background-color: #444444; /* Cinza mais claro ao passar o mouse */
+}
+
+/* Botões da lista de tarefas */
+.task-btn {
+    width: auto; /* ajusta ao conteúdo */
+    padding: 5px 10px; /* menor que o botão principal */
+    font-size: 14px;
+    margin-left: 5px;
+    border-radius: 6px;
+    background-color: #2c2c2c;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.task-btn:hover {
+    background-color: #444444;
 }
 
 /* Links */
@@ -100,9 +118,4 @@ li.error {
 li.success {
     background-color: #d4edda;
     color: #155724;
-}
-
-li.error {
-    background-color: #f8d7da;
-    color: #721c24;
 }

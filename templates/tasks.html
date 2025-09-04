@@ -2,37 +2,50 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minhas Tarefas</title>
+    <title>Lista de Tarefas</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
+    <form action="{{ url_for('add_task') }}" method="POST">
+        <h1>Lista de Tarefas</h1>
 
-    <div class="task-container">
-        <h1>Olá, {{ current_user.username }}!</h1>
-        <a href="{{ url_for('logout') }}"><button>Logout</button></a>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            <ul>
+              {% for category, message in messages %}
+                <li class="{{ category }}">{{ message }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
 
-        <!-- Formulário para adicionar tarefas -->
-        <form action="{{ url_for('add_task') }}" method="POST">
-            <input type="text" name="title" placeholder="Digite sua tarefa..." required>
-            <button type="submit">Adicionar</button>
-        </form>
+        <input type="text" name="title" placeholder="Nova tarefa">
+        <button type="submit">Adicionar</button>
+    </form>
 
-        <!-- Lista de tarefas -->
-        <ul>
-            {% for task in tasks %}
-            <li class="{{ 'done' if task.done else '' }}">
-                <form action="{{ url_for('toggle', id=task.id) }}" method="GET" style="display:inline;">
-                    <button type="submit" class="small-btn">{{ '✅' if task.done else '☐' }}</button>
-                </form>
-                {{ task.title }}
-                <a href="{{ url_for('edit', id=task.id) }}"><button class="small-btn edit">✏️</button></a>
-                <a href="{{ url_for('delete', id=task.id) }}"><button class="small-btn delete">🗑️</button></a>
-            </li>
-            {% endfor %}
-        </ul>
+    <div style="margin-top: 20px; width: 300px;">
+        {% for task in tasks %}
+            <div style="background-color: #fff; padding: 10px; margin-bottom: 8px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center;">
+                <span {% if task.done %}style="text-decoration: line-through; color: #888;"{% endif %}>{{ task.title }}</span>
+                <div>
+                    <form action="{{ url_for('toggle', id=task.id) }}" method="GET" style="display:inline;">
+                        <button type="submit" class="task-btn">
+                            {% if task.done %}Desmarcar{% else %}Concluir{% endif %}
+                        </button>
+                    </form>
+
+                    <form action="{{ url_for('edit', id=task.id) }}" method="GET" style="display:inline;">
+                        <button type="submit" class="task-btn">Editar</button>
+                    </form>
+
+                    <form action="{{ url_for('delete', id=task.id) }}" method="GET" style="display:inline;">
+                        <button type="submit" class="task-btn">Excluir</button>
+                    </form>
+                </div>
+            </div>
+        {% endfor %}
     </div>
 
+    <p><a href="{{ url_for('logout') }}">Sair</a></p>
 </body>
 </html>
-
