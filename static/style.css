@@ -1,69 +1,77 @@
-body {
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
     font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
+}
+
+/* Corpo da página */
+body {
+    background-color: #f2f2f2;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    margin: 0;
 }
 
-.container {
-    background-color: #ffffff;
+/* Container dos formulários */
+form {
+    background-color: #fff;
     padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
-    width: 350px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    width: 300px;
+    text-align: center;
 }
 
+/* Títulos */
 h1 {
-    text-align: center;
+    margin-bottom: 20px;
     color: #333;
 }
 
-form {
-    display: flex;
-    flex-direction: column;
-}
-
+/* Inputs */
 input[type="text"],
 input[type="password"] {
-    padding: 10px;
+    width: 100%;
+    padding: 10px 12px;
     margin-bottom: 15px;
-    border-radius: 5px;
     border: 1px solid #ccc;
+    border-radius: 8px;
+    transition: 0.3s;
 }
 
+input[type="text"]:focus,
+input[type="password"]:focus {
+    border-color: #007BFF;
+    outline: none;
+}
+
+/* Botões */
 button {
-    padding: 10px;
+    width: 100%;
+    padding: 10px 12px;
     border: none;
-    border-radius: 5px;
-    cursor: pointer;
+    border-radius: 8px;
+    background-color: #2c2c2c; /* Cinza escuro */
     color: white;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
 }
 
-button.login-btn {
-    background-color: #4CAF50;
+button:hover {
+    background-color: #444444; /* Cinza mais claro ao passar o mouse */
 }
 
-button.login-btn:hover {
-    background-color: #45a049;
-}
-
-button.signup-btn {
-    background-color: #2196F3;
-}
-
-button.signup-btn:hover {
-    background-color: #0b7dda;
+/* Links */
+p {
+    margin-top: 15px;
 }
 
 a {
-    text-align: center;
-    margin-top: 10px;
-    color: #2196F3;
+    color: #007BFF;
     text-decoration: none;
 }
 
@@ -71,9 +79,25 @@ a:hover {
     text-decoration: underline;
 }
 
-.error {
-    color: red;
-    font-size: 0.9em;
-    text-align: center;
-    margin-bottom: 10px;
+/* Flash messages */
+ul {
+    list-style: none;
+    margin-bottom: 15px;
+}
+
+li {
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+li.error {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+li.success {
+    background-color: #d4edda;
+    color: #155724;
 }
