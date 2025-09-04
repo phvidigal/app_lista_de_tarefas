@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Editar Tarefa</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <h2>Editar Tarefa</h2>
+  <form method="post">
+    <input type="text" name="title" value="{{ task.title }}">
+    <button type="submit">Salvar</button>
+  </form>
+</body>
+</html>

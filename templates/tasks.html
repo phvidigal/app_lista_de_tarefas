@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Minhas Tarefas</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <h2>Olá, {{ current_user.username }}</h2>
+  <a href="{{ url_for('logout') }}">Sair</a>
+
+  <form method="post" action="{{ url_for('add') }}">
+    <input type="text" name="title" placeholder="Nova tarefa">
+    <button type="submit">Adicionar</button>
+  </form>
+
+  <ul>
+    {% for task in tasks %}
+      <li>
+        {% if task.done %}
+          <s>{{ task.title }}</s>
+        {% else %}
+          {{ task.title }}
+        {% endif %}
+        <a href="{{ url_for('toggle', id=task.id) }}">[Concluir]</a>
+        <a href="{{ url_for('edit', id=task.id) }}">[Editar]</a>
+        <a href="{{ url_for('delete', id=task.id) }}">[Excluir]</a>
+      </li>
+    {% endfor %}
+  </ul>
+</body>
+</html>
