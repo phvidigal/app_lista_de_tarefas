@@ -2,21 +2,21 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <title>Sign Up</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <div class="container">
-        <h1>Login</h1>
+        <h1>Criar Conta</h1>
         {% if error %}
             <div class="error">{{ error }}</div>
         {% endif %}
         <form method="POST">
             <input type="text" name="username" placeholder="Usuário" required>
             <input type="password" name="password" placeholder="Senha" required>
-            <button class="login-btn" type="submit">Entrar</button>
+            <button class="signup-btn" type="submit">Cadastrar</button>
         </form>
-        <a href="{{ url_for('signup') }}">Criar conta</a>
+        <a href="{{ url_for('login') }}">Já possui conta? Entrar</a>
     </div>
 </body>
 </html>

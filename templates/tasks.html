@@ -2,36 +2,37 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Lista de Tarefas</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minhas Tarefas</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>Lista de Tarefas</h1>
 
-    <!-- Formulário para adicionar nova tarefa -->
-    <form action="{{ url_for('add_task') }}" method="POST">
-        <input type="text" name="title" placeholder="Digite uma nova tarefa">
-        <button type="submit" class="add">Adicionar</button>
-    </form>
+    <div class="task-container">
+        <h1>Olá, {{ current_user.username }}!</h1>
+        <a href="{{ url_for('logout') }}"><button>Logout</button></a>
 
-    <!-- Lista de tarefas -->
-    <ul>
-        {% for task in tasks %}
-        <li>
-            {% if task.done %}
-                <s>{{ task.title }}</s>
-            {% else %}
+        <!-- Formulário para adicionar tarefas -->
+        <form action="{{ url_for('add_task') }}" method="POST">
+            <input type="text" name="title" placeholder="Digite sua tarefa..." required>
+            <button type="submit">Adicionar</button>
+        </form>
+
+        <!-- Lista de tarefas -->
+        <ul>
+            {% for task in tasks %}
+            <li class="{{ 'done' if task.done else '' }}">
+                <form action="{{ url_for('toggle', id=task.id) }}" method="GET" style="display:inline;">
+                    <button type="submit" class="small-btn">{{ '✅' if task.done else '☐' }}</button>
+                </form>
                 {{ task.title }}
-            {% endif %}
-            <span>
-                <a href="{{ url_for('toggle', id=task.id) }}">✔️</a>
-                <a href="{{ url_for('edit', id=task.id) }}" class="edit">Editar</a>
-                <a href="{{ url_for('delete', id=task.id) }}" class="delete">Excluir</a>
-            </span>
-        </li>
-        {% endfor %}
-    </ul>
+                <a href="{{ url_for('edit', id=task.id) }}"><button class="small-btn edit">✏️</button></a>
+                <a href="{{ url_for('delete', id=task.id) }}"><button class="small-btn delete">🗑️</button></a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
 
-    <p><a href="{{ url_for('logout') }}">Logout</a></p>
 </body>
 </html>
+
