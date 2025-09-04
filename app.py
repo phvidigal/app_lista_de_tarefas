@@ -62,16 +62,19 @@ def tasks():
     tasks = Task.query.filter_by(user_id=current_user.id).all()
     return render_template('tasks.html', tasks=tasks)
 
-
-@app.route('/add', methods=['POST'])
+@app.route("/add_task", methods=["POST"])
 @login_required
-def add():
-    title = request.form['title']
-    new_task = Task(title=title, user_id=current_user.id)
+def add_task():
+    title = request.form.get("title", "").strip()
+    
+    if not title:
+        return redirect(url_for("tasks"))
+    
+    new_task = Task(title=title, done=False, user_id=current_user.id)
     db.session.add(new_task)
     db.session.commit()
-    return redirect(url_for('tasks'))
-
+    
+    return redirect(url_for("tasks"))
 
 @app.route('/edit/<int:id>', methods=['GET', 'POST'])
 @login_required

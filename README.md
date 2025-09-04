@@ -1,7 +1,14 @@
-# ToDo App com Flask + Login
+O projeto consiste em uma lista de tarefas onde é possível adicionar 
+e remover tarefas, alem de marcar quais foram concluídas.
+O projeto foi desenvolvido em FLASK e possui um sistema de login simples para autenticação dos usuários.
 
-Projeto de lista de tarefas com autenticação, feito em **Flask**.  
-Inclui CRUD de tarefas, login/logout e API REST simples.
+Foram utilizadas as seguintes tecnologias:
+- Python 3.11
+- Flask
+- Flask-Login
+- SQLAlchemy
+- HTML / CSS
+- SQLite
 
 ## 🚀 Como rodar localmente
 

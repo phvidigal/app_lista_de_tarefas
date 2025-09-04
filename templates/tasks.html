@@ -1,31 +1,37 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 <head>
-  <title>Minhas Tarefas</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta charset="UTF-8">
+    <title>Lista de Tarefas</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-  <h2>Olá, {{ current_user.username }}</h2>
-  <a href="{{ url_for('logout') }}">Sair</a>
+    <h1>Lista de Tarefas</h1>
 
-  <form method="post" action="{{ url_for('add') }}">
-    <input type="text" name="title" placeholder="Nova tarefa">
-    <button type="submit">Adicionar</button>
-  </form>
+    <!-- Formulário para adicionar nova tarefa -->
+    <form action="{{ url_for('add_task') }}" method="POST">
+        <input type="text" name="title" placeholder="Digite uma nova tarefa">
+        <button type="submit" class="add">Adicionar</button>
+    </form>
 
-  <ul>
-    {% for task in tasks %}
-      <li>
-        {% if task.done %}
-          <s>{{ task.title }}</s>
-        {% else %}
-          {{ task.title }}
-        {% endif %}
-        <a href="{{ url_for('toggle', id=task.id) }}">[Concluir]</a>
-        <a href="{{ url_for('edit', id=task.id) }}">[Editar]</a>
-        <a href="{{ url_for('delete', id=task.id) }}">[Excluir]</a>
-      </li>
-    {% endfor %}
-  </ul>
+    <!-- Lista de tarefas -->
+    <ul>
+        {% for task in tasks %}
+        <li>
+            {% if task.done %}
+                <s>{{ task.title }}</s>
+            {% else %}
+                {{ task.title }}
+            {% endif %}
+            <span>
+                <a href="{{ url_for('toggle', id=task.id) }}">✔️</a>
+                <a href="{{ url_for('edit', id=task.id) }}" class="edit">Editar</a>
+                <a href="{{ url_for('delete', id=task.id) }}" class="delete">Excluir</a>
+            </span>
+        </li>
+        {% endfor %}
+    </ul>
+
+    <p><a href="{{ url_for('logout') }}">Logout</a></p>
 </body>
 </html>
