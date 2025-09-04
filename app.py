@@ -65,13 +65,17 @@ def signup():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        user = User.query.filter_by(username=request.form['username']).first()
-        if user and check_password_hash(user.password, request.form['password']):
-            login_user(user)
-            return redirect(url_for('tasks'))
-        else:
-            flash("Usuário ou senha incorretos!", "error")
+        username = request.form['username']
+        password = request.form['password']
+        user = User.query.filter_by(username=username).first()
+        
+        if not user or not check_password_hash(user.password, password):
+            flash('Usuário ou senha incorretos!', 'error')
             return redirect(url_for('login'))
+        
+        login_user(user)
+        return redirect(url_for('tasks'))
+    
     return render_template('login.html')
 
 # -------- LOGOUT --------

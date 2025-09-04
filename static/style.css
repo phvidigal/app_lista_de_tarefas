@@ -101,3 +101,8 @@ li.success {
     background-color: #d4edda;
     color: #155724;
 }
+
+li.error {
+    background-color: #f8d7da;
+    color: #721c24;
+}
